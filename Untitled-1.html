@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Store Information</title>
+</head>
+<body>
+  <div id="message"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const messageElement = document.getElementById('message');
+      messageElement.innerHTML = 'Hello, World!';
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const express = axios.create({
+      baseURL: 'http://localhost:3000' // 假設伺服器在本地執行，且使用預設的 3000 port
+    });
+
+    express.get('/store-info')
+      .then(function (response) {
+        const storeInfo = response.data;
+        const isTemperatureSuitable = storeInfo.temperature >= 20 && storeInfo.temperature <= 25;
+
+        const infoElement = document.createElement('div');
+        infoElement.innerHTML = `
+          <h2>Store Information</h2>
+          <p>Temperature: ${storeInfo.temperature}°C</p>
+          <p>Is Temperature Suitable: ${isTemperatureSuitable ? 'Yes' : 'No'}</p>
+          <p>Customer Count: ${storeInfo.customerCount}</p>
+        `;
+        document.body.appendChild(infoElement);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  </script>
+</body>
+</html>
