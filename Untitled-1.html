@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Store Information</title>
+</head>
+<body>
+  <div id="message"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const messageElement = document.getElementById('message');
+      messageElement.innerHTML = 'Hello, World!';
+    });
+
+    const currentTemperature = 24; // 假設當前溫度是 24 度
+    const currentCustomerCount = 50; // 假設當前顧客數量是 50 人
+
+    const isTemperatureSuitable = currentTemperature >= 20 && currentTemperature <= 25;
+
+    const storeInfo = {
+      temperature: currentTemperature,
+      isTemperatureSuitable: isTemperatureSuitable,
+      customerCount: currentCustomerCount
+    };
+
+    // 模擬 API 請求
+    setTimeout(function() {
+      displayStoreInfo(storeInfo);
+    }, 1000);
+
+    function displayStoreInfo(storeInfo) {
+      const infoElement = document.createElement('div');
+      infoElement.innerHTML = `
+        <h2>Store Information</h2>
+        <p>Temperature: ${storeInfo.temperature}°C</p>
+        <p>Is Temperature Suitable: ${storeInfo.isTemperatureSuitable ? 'Yes' : 'No'}</p>
+        <p>Customer Count: ${storeInfo.customerCount}</p>
+      `;
+      document.body.appendChild(infoElement);
+    }
+  </script>
+</body>
+</html>
